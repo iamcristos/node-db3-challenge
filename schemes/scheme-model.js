@@ -42,8 +42,9 @@ function remove(id) {
 };
 
 function addStep(step, scheme_id) {
+    
     const newStep = {...step,scheme_id}
-    return db("'steps'")
+    return db("steps")
             .insert(newStep)
             .then(()=> findSteps(scheme_id))
 }
