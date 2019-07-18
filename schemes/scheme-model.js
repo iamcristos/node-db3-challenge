@@ -15,7 +15,7 @@ function findSteps(scheme_id) {
             .select("steps.*", "schemes.scheme_name" )
             .innerJoin("schemes", "schemes.id", "steps.scheme_id" )
             .where({scheme_id})
-            // .groupBy('steps.step_number')
+            .orderBy('steps.step_number')
 }
 
 function add(scheme) {
@@ -36,9 +36,11 @@ function update(changes, id) {
 };
 
 function remove(id) {
+    const dl = findById(id)
     return db('schemes')
             .where({id})
             .del()
+            .then(()=> dl)
 };
 
 function addStep(step, scheme_id) {
